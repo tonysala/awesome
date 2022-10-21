@@ -78,8 +78,6 @@ theme.widget_vol               = theme.dir .. "/icons/vol.png"
 theme.widget_vol_low           = theme.dir .. "/icons/vol_low.png"
 theme.widget_vol_no            = theme.dir .. "/icons/vol_no.png"
 theme.widget_vol_mute          = theme.dir .. "/icons/vol_mute.png"
-theme.widget_mail              = theme.dir .. "/icons/mail.png"
-theme.widget_mail_on           = theme.dir .. "/icons/mail_on.png"
 
 -- Tasklist settings
 theme.tasklist_plain_task_name = true
@@ -102,26 +100,6 @@ theme.cal = lain.widget.cal({
         fg = theme.fg_normal,
         bg = theme.bg_normal
     }
-})
-
--- Mail IMAP check
-theme.mail_icon = wibox.widget.imagebox(theme.widget_mail, true)
--- commented because it needs to be set before use
-theme.mail_icon:buttons(table.join(awful.button({ }, 1, function () awful.spawn(mail) end)))
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "imap.gmail.com",
-    mail     = "tonysala32@gmail.com",
-    password = "spainladderbusinessyear",
-    settings = function()
---        if mailcount > 0 then
---            widget:set_text(" " .. mailcount .. " ")
---            theme.mail_icon:set_image(theme.widget_mail_on)
---        else
---            widget:set_text("")
---            mailicon:set_image(theme.widget_mail)
---        end
-    end
 })
 
 -- MPD
@@ -184,16 +162,6 @@ theme.temp_icon = wibox.widget.imagebox(theme.widget_temp, true)
 theme.temp = lain.widget.temp({
     settings = function()
         widget:set_markup(markup.font(theme.font, " " .. math.floor(coretemp_now) .. "°C "))
-    end
-})
-
--- Coinbase
-theme.coinbase = lain.widget.coinbase({
-    symbol = "algo",
-    initial_markup = markup.font(theme.font, " ... "),
-    timeout = 10,
-    settings = function(symbol, price)
-        widget:set_markup(markup.font(theme.font, "ALG: " .. string.format("£%.4f ", price)))
     end
 })
 
@@ -314,14 +282,6 @@ function theme.at_screen_connect(s)
                 COLOR_NAVY_LIGHTER
             ),
             wibox.container.background(
-                wibox.container.margin(theme.mail_icon, 3, 0),
-                COLOR_NAVY
-            ),
-            wibox.container.background(
-                wibox.container.margin(theme.mail.widget, 0, 3),
-                COLOR_NAVY
-            ),
-            wibox.container.background(
                 wibox.container.margin(theme.mem_icon, 6, 0),
                 COLOR_NAVY_LIGHTER
             ),
@@ -344,10 +304,6 @@ function theme.at_screen_connect(s)
             wibox.container.background(
                 wibox.container.margin(theme.temp.widget, 0, 6),
                 COLOR_NAVY_LIGHTER
-            ),
-            wibox.container.background(
-                wibox.container.margin(theme.coinbase.widget, 6, 3),
-                COLOR_NAVY
             ),
             wibox.container.background(
                 wibox.container.margin(theme.bat_icon, 6, 0),
